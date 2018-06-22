@@ -25,7 +25,7 @@ export default Mixin.create(RunOnRafMixin, {
   init(){
     this._super(...arguments);
 
-    set(this, 'currentTouches', new WeakMap());
+    set(this, 'currentTouches', new Map());
   },
 
   // hooks
