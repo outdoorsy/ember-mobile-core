@@ -40,7 +40,7 @@ export default function parseTouchData(previousTouchData, touch, e) {
   const touchData = assign({}, previousTouchData);
   const data = touchData.data;
 
-  if(data.current){
+  if(data && data.current){
     data.current.deltaX = touch.clientX - data.current.x;
     data.current.deltaY = touch.clientY - data.current.y;
   } else {
