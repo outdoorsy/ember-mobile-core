@@ -46,6 +46,7 @@ export default Mixin.create(RunOnRafMixin, {
 
     // if an axis is set, limit scroll to a single axis
     const axis = get(this, 'axis');
+
     if(axis === 'horizontal'){
       this.element.style.touchAction = 'pan-y';
     } else if(axis === 'vertical') {
@@ -56,11 +57,13 @@ export default Mixin.create(RunOnRafMixin, {
       capture: get(this, 'useCapture'),
       passive: true
     };
+
     this.element.addEventListener('touchstart', get(this, 'didTouchStart').bind(this), options);
-    this.element.addEventListener('touchmove', get(this, 'didTouchMove').bind(this), {capture: get(this, 'useCapture')});
+    this.element.addEventListener('touchmove', get(this, 'didTouchMove').bind(this), options);
     this.element.addEventListener('touchend', get(this, 'didTouchEnd').bind(this), options);
     this.element.addEventListener('touchcancel', get(this, 'didTouchEnd').bind(this), options);
   },
+
   willDestroyElement(){
     this._super(...arguments);
 
@@ -69,7 +72,7 @@ export default Mixin.create(RunOnRafMixin, {
       passive: true
     };
     this.element.removeEventListener('touchstart', get(this, 'didTouchStart').bind(this), options);
-    this.element.removeEventListener('touchmove', get(this, 'didTouchMove').bind(this), {capture: get(this, 'useCapture')});
+    this.element.removeEventListener('touchmove', get(this, 'didTouchMove').bind(this), options);
     this.element.removeEventListener('touchend', get(this, 'didTouchEnd').bind(this), options);
     this.element.removeEventListener('touchcancel', get(this, 'didTouchEnd').bind(this), options);
   },
